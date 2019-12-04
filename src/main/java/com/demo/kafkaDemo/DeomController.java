@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+/**
+ *
+ * @author fangyuan
+ */
 @RestController
 public class DeomController {
-
 
     @Autowired
     private KafkaTemplate<Integer,String> kafkaTemplate;
