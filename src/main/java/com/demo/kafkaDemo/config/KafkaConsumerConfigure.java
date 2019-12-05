@@ -1,5 +1,6 @@
 package com.demo.kafkaDemo.config;
 
+import com.demo.kafkaDemo.BitchListeners;
 import com.demo.kafkaDemo.interceptor.PersonInfoConsumerInterceptor;
 import com.demo.kafkaDemo.interceptor.SomeBean;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -173,39 +174,43 @@ public class KafkaConsumerConfigure {
 //
 //        return handler;
 //    }
-//
-//    /**
-//     * 构建并行消费监听容器批次处理
-//     * @param consumerFactory
-//     * @return
-//     */
-////    @Bean
-//    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<Integer,String>> bitchFactory(ConsumerFactory<Integer,String> consumerFactory){
-//
-//        //构建kafka并行消费监听类工厂类 此类通过topic名称创建该topic消费监听
-//        ConcurrentKafkaListenerContainerFactory<Integer,String> concurrentKafkaListenerContainerFactory =
-//                new ConcurrentKafkaListenerContainerFactory<>();
-//
-//        //可通过注解的方式进行设置
-//        concurrentKafkaListenerContainerFactory.setConsumerFactory(consumerFactory);
-//        //并行数
-//        concurrentKafkaListenerContainerFactory.setConcurrency(3);
-//        //设置拉取时间超时数
-//        concurrentKafkaListenerContainerFactory.getContainerProperties().setPollTimeout(3000);
-//        //是否开启 批次处理
-//        concurrentKafkaListenerContainerFactory.setBatchListener(true);
-//
-//        return concurrentKafkaListenerContainerFactory;
-//
-//    }
-//
-////    @Bean
-//    public BitchListeners bitchListeners(){
-//
-//        return new BitchListeners("test1");
-//    }
-//
-//
+
+    /**
+     * 构建并行消费监听容器批次处理
+     * @param consumerFactory
+     * @return
+     */
+    @Bean
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<Integer,String>> bitchFactory(ConsumerFactory<Integer,String> consumerFactory){
+
+        //构建kafka并行消费监听类工厂类 此类通过topic名称创建该topic消费监听
+        ConcurrentKafkaListenerContainerFactory<Integer,String> concurrentKafkaListenerContainerFactory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+
+        //可通过注解的方式进行设置
+        concurrentKafkaListenerContainerFactory.setConsumerFactory(consumerFactory);
+        //并行数
+        concurrentKafkaListenerContainerFactory.setConcurrency(3);
+        //设置拉取时间超时数
+        concurrentKafkaListenerContainerFactory.getContainerProperties().setPollTimeout(3000);
+        //是否开启 批次处理
+        concurrentKafkaListenerContainerFactory.setBatchListener(true);
+
+        return concurrentKafkaListenerContainerFactory;
+
+    }
+
+    /**
+     * 注册bean
+     * @return
+     */
+    @Bean
+    public BitchListeners bitchListeners(){
+
+        return new BitchListeners("springboot_test_topic");
+    }
+
+
     /**
      * 设置并行任务
      * @return

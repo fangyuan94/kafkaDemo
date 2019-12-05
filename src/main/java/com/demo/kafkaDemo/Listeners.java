@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author fangyuan
  */
 @Component
-@EnableKafka
+//@EnableKafka
 public class Listeners {
 
     @KafkaListener(id = "test"

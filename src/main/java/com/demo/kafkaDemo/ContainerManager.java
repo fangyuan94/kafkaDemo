@@ -26,12 +26,9 @@ public class ContainerManager {
 //
     public void test(){
 
-        //停止id名为consumer2为监听容器
-        registry.getListenerContainer("consumer2").stop();
-
-        //启动监听容器
-        registry.getListenerContainer("consumer2").start();
-
+        //获取spring容器中bean名为consumer2的ListenerContainer
+        MessageListenerContainer mlc = registry.getListenerContainer("consumer2");
+        mlc.pause();
         //获取托管容器的集合 但不包含被声明为Bean的容器
         Collection<MessageListenerContainer> cs =  registry.getListenerContainers();
 
@@ -40,10 +37,15 @@ public class ContainerManager {
 
         //获取所有容器ids
         Set<String> containerIds =  registry.getListenerContainerIds();
-//        KafkaListenerEndpoint endpoint = null;
-
         //注册新的监听
 //        registry.registerListenerContainer(endpoint,kafkaListenerContainerFactory);
+
+
+        //是否随spirng自启动
+        registry.isAutoStartup();
+
+        //
+        registry.isRunning();
 
     }
 }

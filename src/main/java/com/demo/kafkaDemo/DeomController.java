@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.demo.kafkaDemo.bean.PersonInfo;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.clients.producer.internals.DefaultPartitioner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -50,6 +51,7 @@ public class DeomController {
         Integer key = new Random().nextInt(100);
         //kafka发送消息
         ListenableFuture<SendResult<Integer, String>>  future = kafkaTemplate.send("springboot_test_topic",key,j.toJSONString());
+
 
 
         //异步回调确认

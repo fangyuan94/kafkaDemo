@@ -40,9 +40,10 @@ public class KafkaProducerConfigure {
         props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, PersonInfoProducerInterceptor.class.getName());
         SomeBean someBean = new SomeBean();
         props.put("someBean",someBean);
-
-        //设置对象属性映射
-//        props.put(JsonSerializer.TYPE_MAPPINGS, "");
+        /**
+         * 自定义分区器 如果不指定则为默认分区器 DefaultPartitioner
+         */
+        props.put("partitioner.class","com.demo.kafkaDemo.partitioner.MyPartitioner");
 
         return props;
     }
